@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDb from './db'
+import router from './routes/mainRoute'
 
 dotenv.config()
 
@@ -17,6 +18,8 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use(morgan('dev'))
+
+app.use('/api', router)
 
 const PORT = process.env.PORT || 3001
 
