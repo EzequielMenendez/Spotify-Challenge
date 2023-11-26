@@ -6,7 +6,7 @@ const trackModel = new mongoose.Schema({
         require: true
     },
     track:{
-        type: Buffer,
+        type: String,
         require: true
     }
 })

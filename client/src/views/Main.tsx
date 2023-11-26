@@ -36,11 +36,6 @@ const Main = ()=> {
             <div className="flex items-center justify-center gap-10 flex-col md:flex-row mt-20">
                 <Menu tracks={tracks} handleClickSong={handleClickSong}/>
                 <img src={album} alt="album Thriller" className="rounded-2xl w-48 h-auto sm:w-80 xl:w-96"/>
-                <audio controls>
-  	                <source src="" type="audio/mp3">
-  	                Tu navegador no soporta HTML5 audio.
-                    </source>
-                </audio>
             </div>
             <Navigation />
         </div>
