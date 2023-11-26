@@ -1,10 +1,13 @@
 import {Router} from 'express'
-import getTracks from '../controllers/trackController/getTracks'
+import getTrackById from '../controllers/trackController/getTrackById'
 import postTrack from '../controllers/trackController/postTrack'
+import getTracks from '../controllers/trackController/getTracks'
 
 const trackRouter = Router()
 
-trackRouter.get('/:id', getTracks)
+trackRouter.get('/', getTracks)
+
+trackRouter.get('/:id', getTrackById)
 
 trackRouter.post('/', postTrack)
 
