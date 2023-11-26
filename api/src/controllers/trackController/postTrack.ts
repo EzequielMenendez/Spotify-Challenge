@@ -31,6 +31,8 @@ const postTrack = async(req:Request, res:Response) => {
                 return res.status(400).json({ message: 'No track name in request body' });
             }
 
+            console.log(req.file.buffer)
+
             const track = new Track({ name: name, track: req.file.buffer});
      
             const savedTrack = await track.save();
