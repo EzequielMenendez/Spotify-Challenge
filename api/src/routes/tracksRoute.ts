@@ -4,7 +4,7 @@ import postTrack from '../controllers/trackController/postTrack'
 
 const trackRouter = Router()
 
-trackRouter.get('/', getTracks)
+trackRouter.get('/:id', getTracks)
 
 trackRouter.post('/', postTrack)
 

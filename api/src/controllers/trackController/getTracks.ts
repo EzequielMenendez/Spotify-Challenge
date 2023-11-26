@@ -1,8 +1,23 @@
-import { Request, Response } from "express"
-//import multer from "multer"
+import { Request, Response } from 'express';
+import Track from '../../models/trackModel';
 
-const getTracks = async(_req:Request, res:Response) => {
-    res.send('track')
-}
+const getTrack = async (req: Request, res: Response) => {
+    try {
+        const track = await Track.findById(req.params.id);
 
-export default getTracks
+        if (!track) {
+            res.status(404).json({ message: 'Track not found' });
+            return
+        }
+
+        res.set('Content-Type', 'audio/mpeg'); 
+        res.set('Content-Disposition', `attachment; filename="${track.name}.mp3"`);
+
+        res.send(track.track);
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Error retrieving track' });
+    }
+};
+
+export default getTrack;
