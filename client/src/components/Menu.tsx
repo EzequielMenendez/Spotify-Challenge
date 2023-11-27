@@ -10,10 +10,11 @@ interface Track {
 interface TracksData {
     tracks: Track[];
     handleClickSong: Function;
+    selected: string;
 }
 
 const Menu: React.FC<TracksData> = (props) => {
-    const {tracks, handleClickSong} = props
+    const {tracks, handleClickSong, selected} = props
     return(
         <div className='flex flex-col items-center justify-center border border-black rounded-2xl gap-10 w-52 sm:w-96 xl:w-[36rem]'>
             <div className='flex items-center border border-black rounded-md place-content-around w-10/12 pt-1 pb-1 mt-10'>
@@ -21,9 +22,13 @@ const Menu: React.FC<TracksData> = (props) => {
                 <h2 className='text-lg ml-1'>Michael Jackson</h2>
             </div>
             <div className='flex flex-col border border-black w-10/12 h-36 mb-10 overflow-y-scroll scrollbar'>
-                {tracks.map((track, i)=>(
+            {tracks.map((track, i) => (
                     <div key={track._id}>
-                        <button onClick={()=> handleClickSong(i)} className='border border-y-black w-full p-3 h-12 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>{track.name}</button>
+                        <button
+                            onClick={() => handleClickSong(i)}
+                            className={`border border-y-black w-full p-3 h-12 overflow-hidden whitespace-nowrap text-overflow-ellipsis ${track.name === selected ? 'bg-blue-500' : '' }`}>
+                            {track.name}
+                        </button>
                     </div>
                 ))}
             </div>
