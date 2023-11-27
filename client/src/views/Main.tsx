@@ -2,12 +2,12 @@ import { getTracks } from "../api/auth"
 import Menu from "../components/Menu"
 import Navigation from "../components/Navigation"
 import album from "../utils/Michael_Jackson_Album.png"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 const Main = ()=> {
     const [tracks, setTracks] = useState([])
     const [play, setPlay] = useState(false)
-    let currentAudio: HTMLAudioElement | null = null;
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(()=>{
         const asyncFunction = async()=>{
@@ -15,7 +15,7 @@ const Main = ()=> {
                 const res = await getTracks();
                 setTracks(res.data)
                 const audio = new Audio(res.data[0].track);
-                currentAudio = audio;
+                audioRef.current = audio;
             } catch (error) {
                 console.error("Error fetching tracks:", error);
             }
@@ -24,13 +24,13 @@ const Main = ()=> {
     },[])
 
     const handleClickSong = (track: string) => {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
         }
 
         const audio = new Audio(track);
-        currentAudio = audio;
+        audioRef.current = audio;
 
         audio.addEventListener('ended', () => {
             setPlay(false);
@@ -40,21 +40,19 @@ const Main = ()=> {
         setPlay(true);
     };
 
-    const handlePause = async() => {
-        if(currentAudio){
-            currentAudio.pause();
+    const handlePause = () => {
+        if (audioRef.current) {
+            audioRef.current.pause();
             setPlay(false);
-            return;
         }
-    }
+    };
 
-    const handlePlay = async() => {
-        if(currentAudio){
-            currentAudio.play();
-            setPlay(true)
-            return
+    const handlePlay = () => {
+        if (audioRef.current) {
+            audioRef.current.play();
+            setPlay(true);
         }
-    }
+    };
 
     return(
         <div className="flex items-center justify-center flex-col">
