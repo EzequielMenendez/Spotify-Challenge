@@ -4,6 +4,7 @@ import michaeljackson from '../utils/michaeljackson.jpg'
 interface Track {
     _id: string;
     name: string;
+    track: string;
 }
 
 interface TracksData {
@@ -22,7 +23,7 @@ const Menu: React.FC<TracksData> = (props) => {
             <div className='flex flex-col border border-black w-10/12 h-36 mb-10 overflow-y-scroll scrollbar'>
                 {tracks.map((track)=>(
                     <div key={track._id}>
-                        <button onClick={()=> handleClickSong(track._id)} className='border border-y-black w-full p-3 h-12 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>{track.name}</button>
+                        <button onClick={()=> handleClickSong(track.track)} className='border border-y-black w-full p-3 h-12 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>{track.name}</button>
                     </div>
                 ))}
             </div>
