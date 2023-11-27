@@ -21,9 +21,9 @@ const Menu: React.FC<TracksData> = (props) => {
                 <h2 className='text-lg ml-1'>Michael Jackson</h2>
             </div>
             <div className='flex flex-col border border-black w-10/12 h-36 mb-10 overflow-y-scroll scrollbar'>
-                {tracks.map((track)=>(
+                {tracks.map((track, i)=>(
                     <div key={track._id}>
-                        <button onClick={()=> handleClickSong(track.track)} className='border border-y-black w-full p-3 h-12 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>{track.name}</button>
+                        <button onClick={()=> handleClickSong(i)} className='border border-y-black w-full p-3 h-12 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>{track.name}</button>
                     </div>
                 ))}
             </div>
